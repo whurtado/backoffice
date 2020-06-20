@@ -6,6 +6,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages/pages.component';
 import { LayoutModule } from '../layout/layout.module';
+import { ClientModule } from './client/client.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { LayoutModule } from '../layout/layout.module';
     FormsModule,
     ReactiveFormsModule,
     LayoutModule,
+    ClientModule
   ]
 })
 export class PagesModule { }

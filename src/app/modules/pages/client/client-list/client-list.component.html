@@ -1,0 +1,111 @@
+<div class="app-main__inner">
+  <div class="app-page-title">
+      <div class="page-title-wrapper">
+          <div class="page-title-heading">
+              <div class="page-title-icon">
+                  <i class="pe-7s-diamond icon-gradient bg-mean-fruit"></i>
+              </div>
+              <div>Clientes
+                  <div class="page-title-subheading">
+                    Consulte, cree o actualice la información de sus clientes
+                  </div>
+              </div>
+          </div>
+          <div class="page-title-actions">
+            <button class="mb-2 mr-2 btn btn-primary" data-toggle="tooltip" title="Crear un nuevo cliente" data-placement="top" >
+              Crear
+            </button>
+          </div>
+      </div>
+  </div>
+
+  <div class="main-card mb-3 card animated fadeIn fast">
+    <div class="card-body">
+        <h5 class="card-title">Filtros de Búsqueda</h5>
+        <form class="">
+            <div class="form-row">
+                <div class="col-md-4">
+                    <div class="position-relative form-group">
+                      <!-- <label for="exampleEmail11" class="">Filtro 1</label> -->
+                      <input
+                        name="email"
+                        placeholder="Filtro 1"
+                        type="email"
+                        class="mb-2 form-control-sm form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="position-relative form-group">
+                      <!-- <label for="examplePassword11" class="">Filtro 2</label> -->
+                      <input
+                        name="password"
+                        placeholder="Filtro 2"
+                        type="password"
+                        class="mb-2 form-control-sm form-control">
+                      </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="position-relative form-group">
+                    <!-- <label for="examplePassword11" class="">Filtro 2</label> -->
+                    <input
+                      name="password"
+                      placeholder="Filtro 3"
+                      type="password"
+                      class="mb-2 form-control-sm form-control">
+                    </div>
+              </div>
+            </div>
+            <button type="button" class="mt-2 btn btn-primary">Buscar</button>
+        </form>
+    </div>
+  </div>
+
+  <div class="main-card mb-3 card">
+    <div class="card-body">
+        <h5 class="card-title">Listado</h5>
+        <table class=" table table-bordered table-striped table-hover animated fadeIn">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Tipo de Documento</th>
+                <th>Número Documento</th>
+                <th>Celular</th>
+                <th>Correo</th>
+                <th>Dirección</th>
+                <th>Estado</th>
+                <th>Ciudad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clients; let i=index">
+                  <th scope="row"> {{ i+1 }} </th>
+                  <td>{{ client.name }}</td>
+                  <td>{{ client.documenttype.name }}</td>
+                  <td>{{ client.documentnumber }}</td>
+                  <td>{{ client.phone }}</td>
+                  <td>{{ client.email }}</td>
+                  <td>{{ client.homeaddres }}</td>
+                  <td>{{ client.status.name }}</td>
+                  <td>{{ client.city.name }}</td>
+                  <td>
+                    <div class="text-center">
+                      <!-- <div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"> -->
+                          <button type="button" data-toggle="tooltip" title="Editar" data-placement="top" class="btn-transition btn btn-outline-info">
+                            <i class="fa fa-edit"></i>
+                          </button>
+                          <!-- <button type="button" data-toggle="tooltip" title="Eliminar" data-placement="top" class="btn-transition btn btn-outline-danger">
+                            <i class="fa fa-trash-alt"></i>
+                          </button> -->
+                      </div>
+                    <!-- </div> -->
+                  </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+</div>
+
