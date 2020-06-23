@@ -1,0 +1,6 @@
+<select
+  class="form-control form-control-sm"
+  placeholder="Tipo documento"
+  required>
+  <option *ngFor="let item of datasource" [value]="item.id">{{ item.name }}</option>
+</select>
