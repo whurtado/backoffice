@@ -19,13 +19,16 @@ export class ClientListComponent implements OnInit {
 
   listAllClients(){
 
-    this._clientServise.listAllClients().subscribe(clients => {
-      //console.log(response);
-      this.clients = clients;
-      console.log(this.clients);
+    this._clientServise.listAllClients().subscribe(response => {
+        console.log(response);
+        if(!response.ok){
+            //mostrar mensaje de error
+            console.log(response.message);
+        }
+        this.clients = response.data;
     },
     error => {
-      console.log('error: ', error);
+        console.log('error: ', error);
     });
 
   }

@@ -1,0 +1,141 @@
+<div class="app-main__inner">
+  <div class="app-page-title">
+      <div class="page-title-wrapper">
+          <div class="page-title-heading">
+              <div class="page-title-icon">
+                  <i class="pe-7s-diamond icon-gradient bg-mean-fruit"></i>
+              </div>
+              <div>Crear Cliente
+                  <div class="page-title-subheading">
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="main-card mb-3 card animated fadeIn fast">
+    <div class="card-body">
+        <h5 class="card-title">Datos del cliente</h5>
+
+        <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label>Nombre</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Nombre"
+                  required
+                  formControlName="name">
+              </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label >Tipo documento</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Tipo documento"
+                      required
+                      formControlName="documenttype">
+                      <option *ngFor="let item of dataSourceDocumentType" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label >Número Documento</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Número Documento"
+                      required
+                      formControlName="documentnumber">
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-3 mb-3">
+                    <label >Departamento</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Departamento"
+                      required
+                      formControlName="department">
+                      <option *ngFor="let item of dataSourceDepartment" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Ciudad</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Ciudad"
+                      required
+                      formControlName="city">
+                      <option *ngFor="let item of dataSourceCity" [value]="item.id">{{ item.name }}</option>
+                    </select>
+
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Dirección</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Dirección"
+                      required
+                      formControlName="homeaddres">
+
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                  <label>Celular</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Celular"
+                    required
+                    formControlName="phone">
+
+              </div>
+              <div class="col-md-6 mb-3">
+                  <label>Correo Eléctronico</label>
+                  <input
+                    type="email"
+                    class="form-control form-control-sm"
+                    placeholder="Correo"
+                    required
+                    formControlName="email">
+
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label >Estado</label>
+                <select
+                  class="form-control form-control-sm"
+                  placeholder="Estado"
+                  required
+                  formControlName="status">
+                  <option *ngFor="let item of dataSourceStatus" [value]="item.id">{{ item.name }}</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label >Observaciones</label>
+                <textarea
+                  class="form-control form-control-sm"
+                  cols="30"
+                  rows="5"
+                  formControlName="observations"></textarea>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Guardar</button>
+        </form>
+
+    </div>
+</div>

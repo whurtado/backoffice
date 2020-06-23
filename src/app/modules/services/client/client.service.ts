@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { delay } from "rxjs/operators";
+import { delay, catchError } from "rxjs/operators";
 import {constants} from '../../../../config/app.constants';
 import { EnvService } from '../utils/env.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Client } from '../../models/client.model';
 
 @Injectable({
@@ -27,7 +27,10 @@ export class ClientService {
 
     return this.http.get(url, {headers})
     .pipe(
-      delay(500)
+      delay(500),
+      catchError(err => {
+        return of( err.error);
+      })
     );
   }
 

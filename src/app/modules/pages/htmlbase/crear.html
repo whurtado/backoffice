@@ -1,0 +1,130 @@
+<div class="app-main__inner">
+  <div class="app-page-title">
+      <div class="page-title-wrapper">
+          <div class="page-title-heading">
+              <div class="page-title-icon">
+                  <i class="pe-7s-diamond icon-gradient bg-mean-fruit"></i>
+              </div>
+              <div>Crear Cliente
+                  <div class="page-title-subheading">
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="main-card mb-3 card animated fadeIn fast">
+    <div class="card-body">
+        <h5 class="card-title">Datos del cliente</h5>
+        <form class="needs-validation" novalidate>
+
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label>Nombre</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Nombre"
+                  required>
+              </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label >Tipo documento</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Tipo documento"
+                      required>
+                      <option value="">Seleccione uno</option>
+                    </select>
+
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label >Número Documento</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Número Documento"
+                      required>
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-3 mb-3">
+                    <label >Departamento</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Departamento"
+                      required>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Ciudad</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Ciudad"
+                      required>
+
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Dirección</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Dirección"
+                      required>
+
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                  <label>Celular</label>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Celular"
+                    required>
+
+              </div>
+              <div class="col-md-6 mb-3">
+                  <label>Correo Eléctronico</label>
+                  <input
+                    type="email"
+                    class="form-control form-control-sm"
+                    placeholder="Correo"
+                    required>
+
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label >Estado</label>
+                <select
+                  class="form-control form-control-sm"
+                  placeholder="Estado"
+                  required>
+                  <option value="1">ACTIVO</option>
+                  <option value="2">INACTIVO</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label >Observaciones</label>
+                <textarea
+                  class="form-control form-control-sm"
+                  cols="30"
+                  rows="5"></textarea>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Guardar</button>
+        </form>
+
+    </div>
+</div>

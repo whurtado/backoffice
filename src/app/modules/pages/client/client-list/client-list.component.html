@@ -12,9 +12,14 @@
               </div>
           </div>
           <div class="page-title-actions">
-            <button class="mb-2 mr-2 btn btn-primary" data-toggle="tooltip" title="Crear un nuevo cliente" data-placement="top" >
+            <a
+              class="mb-2 mr-2 btn btn-primary"
+              data-toggle="tooltip"
+              title="Crear un nuevo cliente"
+              data-placement="top"
+              [routerLink]="['/','cliente','crear-cliente']">
               Crear
-            </button>
+            </a>
           </div>
       </div>
   </div>
@@ -62,7 +67,6 @@
 
   <div class="main-card mb-3 card">
     <div class="card-body">
-        <h5 class="card-title">Listado</h5>
         <table class=" table table-bordered table-striped table-hover animated fadeIn">
             <thead>
               <tr>
@@ -92,7 +96,13 @@
                   <td>
                     <div class="text-center">
                       <!-- <div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"> -->
-                          <button type="button" data-toggle="tooltip" title="Editar" data-placement="top" class="btn-transition btn btn-outline-info">
+                          <button
+                            type="button"
+                            data-toggle="tooltip"
+                            title="Editar"
+                            data-placement="top"
+                            class="btn-transition btn btn-outline-info"
+                            >
                             <i class="fa fa-edit"></i>
                           </button>
                           <!-- <button type="button" data-toggle="tooltip" title="Eliminar" data-placement="top" class="btn-transition btn btn-outline-danger">

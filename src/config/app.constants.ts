@@ -7,5 +7,11 @@ export const constants = {
       // actualizarUsuario: 'api/auth/usuarios/actualizar',
 
 
+      documentTypeList: 'api/document-type/',
+
+      statusList: 'api/status/',
+      statusListByModule: 'api/status/client/',
+
+
   }
 };

@@ -20,8 +20,7 @@ import { SharedModule } from './modules/shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SharedModule,
-    
+    SharedModule
   ],
   providers: [EnvServiceProvider],
   bootstrap: [AppComponent]

@@ -10,7 +10,10 @@ import { ClientModule } from './client/client.module';
 
 
 @NgModule({
-  declarations: [DashboardComponent, PagesComponent],
+  declarations: [
+    DashboardComponent,
+    PagesComponent
+  ],
   imports: [
     CommonModule,
     PagesRoutingModule,
