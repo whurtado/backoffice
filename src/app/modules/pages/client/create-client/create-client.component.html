@@ -29,7 +29,8 @@
                   class="form-control form-control-sm"
                   placeholder="Nombre"
                   required
-                  formControlName="name">
+                  formControlName="name"
+                  [class.is-invalid]="isInvalidField('name')">
               </div>
             </div>
             <div class="form-row">
@@ -39,7 +40,9 @@
                       class="form-control form-control-sm"
                       placeholder="Tipo documento"
                       required
-                      formControlName="documenttype">
+                      formControlName="documenttype"
+                      [class.is-invalid]="isInvalidField('documenttype')"
+                      >
                       <option *ngFor="let item of dataSourceDocumentType" [value]="item.id">{{ item.name }}</option>
                     </select>
                 </div>
@@ -50,7 +53,9 @@
                       class="form-control form-control-sm"
                       placeholder="Número Documento"
                       required
-                      formControlName="documentnumber">
+                      formControlName="documentnumber"
+                      [class.is-invalid]="isInvalidField('documentnumber')"
+                      >
 
                 </div>
             </div>
@@ -61,12 +66,11 @@
                       class="form-control form-control-sm"
                       placeholder="Departamento"
                       required
-                      formControlName="department">
+                      formControlName="department"
+                      [class.is-invalid]="isInvalidField('department')"
+                      >
                       <option *ngFor="let item of dataSourceDepartment" [value]="item.id">{{ item.name }}</option>
                     </select>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                    </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label>Ciudad</label>
@@ -74,7 +78,9 @@
                       class="form-control form-control-sm"
                       placeholder="Ciudad"
                       required
-                      formControlName="city">
+                      formControlName="city"
+                      [class.is-invalid]="isInvalidField('city')"
+                      >
                       <option *ngFor="let item of dataSourceCity" [value]="item.id">{{ item.name }}</option>
                     </select>
 
@@ -86,8 +92,9 @@
                       class="form-control form-control-sm"
                       placeholder="Dirección"
                       required
-                      formControlName="homeaddres">
-
+                      formControlName="homeaddres"
+                      [class.is-invalid]="isInvalidField('homeaddres')"
+                      >
                 </div>
             </div>
             <div class="form-row">
@@ -98,7 +105,9 @@
                     class="form-control form-control-sm"
                     placeholder="Celular"
                     required
-                    formControlName="phone">
+                    formControlName="phone"
+                    [class.is-invalid]="isInvalidField('phone')"
+                    >
 
               </div>
               <div class="col-md-6 mb-3">
@@ -108,18 +117,22 @@
                     class="form-control form-control-sm"
                     placeholder="Correo"
                     required
-                    formControlName="email">
+                    formControlName="email"
+                    [class.is-invalid]="isInvalidField('email')"
+                    >
 
               </div>
           </div>
           <div class="form-row">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-3 mb-3">
                 <label >Estado</label>
                 <select
                   class="form-control form-control-sm"
                   placeholder="Estado"
                   required
-                  formControlName="status">
+                  formControlName="status"
+                  [class.is-invalid]="isInvalidField('status')"
+                  >
                   <option *ngFor="let item of dataSourceStatus" [value]="item.id">{{ item.name }}</option>
                 </select>
             </div>
@@ -130,8 +143,10 @@
                 <textarea
                   class="form-control form-control-sm"
                   cols="30"
-                  rows="5"
-                  formControlName="observations"></textarea>
+                  rows="3"
+                  formControlName="observations"
+                  [class.is-invalid]="isInvalidField('observations')"
+                  ></textarea>
             </div>
           </div>
           <button class="btn btn-primary" type="submit">Guardar</button>

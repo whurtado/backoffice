@@ -34,13 +34,15 @@ export class StatusService {
     );
   }
 
-  getAllStatusOfClientModule() : Observable<any>{
+  listAllStatusOfClientModule() : Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    const url = this.env.apiGatewayBackOffice + constants.config.statusListByModule;
+    const idClientModule = 6;
+
+    const url = this.env.apiGatewayBackOffice + constants.config.statusListByModule + idClientModule;
 
     return this.http.get(url, {headers})
     .pipe(
