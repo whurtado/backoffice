@@ -3,14 +3,21 @@ export const constants = {
       // editarCliente: 'api/auth/usuarios',
       // crearUsuario: 'api/auth/usuarios/registrar',
       clientList: 'api/client/',
+      clientCreate: 'api/client/',
       // mostrarUsuario: 'api/auth/usuarios/edit',
       // actualizarUsuario: 'api/auth/usuarios/actualizar',
 
 
       documentTypeList: 'api/document-type/',
+      documentTypeListByModule: 'api/document-type/module/',
 
       statusList: 'api/status/',
-      statusListByModule: 'api/status/client/',
+      statusListByModule: 'api/status/module/',
+
+      departmentList: 'api/department/',
+      departmentListByCountry: 'api/department/country/',
+
+      cityListByDepartment: 'api/city/department/',
 
 
   }

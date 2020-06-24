@@ -18,13 +18,11 @@ export class ClientService {
    * Solicitar la información de todos los clientes
    */
   listAllClients() : Observable<any>{
-
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
     const url = this.env.apiGatewayBackOffice + constants.config.clientList;
-
     return this.http.get(url, {headers})
     .pipe(
       delay(500),
@@ -33,5 +31,21 @@ export class ClientService {
       })
     );
   }
+
+  createClient(client: Client) : Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const url = this.env.apiGatewayBackOffice + constants.config.clientCreate;
+    return this.http.post<Client>(url, client, {headers})
+    .pipe(
+      delay(500),
+      catchError(err => {
+        return of( err.error);
+      })
+    );
+  }
+
 
 }

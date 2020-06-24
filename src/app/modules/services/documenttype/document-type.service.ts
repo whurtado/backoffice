@@ -34,5 +34,24 @@ export class DocumentTypeService {
     );
   }
 
+  listAllDocumentTypeOfClientModule() : Observable<any>{
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const idDocumentTypeModule = 2;
+
+    const url = this.env.apiGatewayBackOffice + constants.config.documentTypeListByModule + idDocumentTypeModule;
+
+    return this.http.get(url, {headers})
+    .pipe(
+      delay(500),
+      catchError(err => {
+        return of( err.error );
+      })
+    );
+  }
+
 
 }
