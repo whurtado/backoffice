@@ -15,4 +15,5 @@ export class Client {
   status: Status;
   documenttype: DocumentType;
   city: City;
+  observations: string;
 }

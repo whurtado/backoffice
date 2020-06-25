@@ -96,15 +96,13 @@
                   <td>
                     <div class="text-center">
                       <!-- <div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"> -->
-                          <button
-                            type="button"
+                          <a [routerLink]="['/','cliente','editar-cliente', client.id]"
                             data-toggle="tooltip"
                             title="Editar"
                             data-placement="top"
-                            class="btn-transition btn btn-outline-info"
-                            >
+                            class="btn-transition btn btn-outline-info">
                             <i class="fa fa-edit"></i>
-                          </button>
+                          </a>
                           <!-- <button type="button" data-toggle="tooltip" title="Eliminar" data-placement="top" class="btn-transition btn btn-outline-danger">
                             <i class="fa fa-trash-alt"></i>
                           </button> -->
