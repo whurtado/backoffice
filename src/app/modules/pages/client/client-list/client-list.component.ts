@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../../services/client/client.service';
 import { Client } from '../../../models/client.model';
+import { AlertMessagesService } from '../../../services/alert/alert-messages.service';
 
 @Component({
   selector: 'app-client-list',
@@ -11,26 +12,24 @@ export class ClientListComponent implements OnInit {
 
   clients: Client[] = [];
 
-  constructor(private _clientServise : ClientService) { }
+  constructor(private _clientServise : ClientService,
+              private _alertMessagesService: AlertMessagesService) { }
 
   ngOnInit(): void {
     this.listAllClients();
   }
 
   listAllClients(){
-
-    this._clientServise.listAllClients().subscribe(response => {
-        console.log(response);
+    this._clientServise.getAllClients().subscribe(response => {
         if(!response.ok){
-            //mostrar mensaje de error
-            console.log(response.message);
+            this._alertMessagesService.showMessage('error', response.message);
+        }else{
+          this.clients = response.data;
         }
-        this.clients = response.data;
     },
     error => {
-        console.log('error: ', error);
+        this._alertMessagesService.showMessage('error', error);
     });
-
   }
 
 }

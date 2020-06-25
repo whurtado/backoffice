@@ -17,18 +17,29 @@ export class ClientService {
   /**
    * Solicitar la información de todos los clientes
    */
-  listAllClients() : Observable<any>{
+  getAllClients() : Observable<any>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
-    headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    const url = this.env.apiGatewayBackOffice + constants.config.clientList;
+    const url = this.env.apiGatewayBackOffice + constants.config.client;
     return this.http.get(url, {headers})
     .pipe(
       delay(500),
-      catchError(err => {
-        return of( err.error);
-      })
+      catchError(err =>  of( err.error))
+    );
+  }
+
+  getClient(id: number) : Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const url = this.env.apiGatewayBackOffice + constants.config.client + id;
+    return this.http.get(url, {headers})
+    .pipe(
+      delay(500),
+      catchError(err => of(err.error))
     );
   }
 
@@ -37,13 +48,24 @@ export class ClientService {
     headers.append('Content-Type', 'application/form-data');
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    const url = this.env.apiGatewayBackOffice + constants.config.clientCreate;
+    const url = this.env.apiGatewayBackOffice + constants.config.client;
     return this.http.post<Client>(url, client, {headers})
     .pipe(
       delay(500),
-      catchError(err => {
-        return of( err.error);
-      })
+      catchError(err => of( err.error))
+    );
+  }
+
+  updateClient(client: Client) : Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const url = this.env.apiGatewayBackOffice + constants.config.client + client.id;
+    return this.http.put<Client>(url, client, {headers})
+    .pipe(
+      delay(500),
+      catchError(err => of( err.error))
     );
   }
 

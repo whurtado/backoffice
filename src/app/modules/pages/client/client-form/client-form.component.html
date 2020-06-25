@@ -5,7 +5,7 @@
               <div class="page-title-icon">
                   <i class="pe-7s-diamond icon-gradient bg-mean-fruit"></i>
               </div>
-              <div>Crear Cliente
+              <div>{{ formTitle }}
                   <div class="page-title-subheading">
 
                   </div>
@@ -19,7 +19,7 @@
     <div class="card-body">
         <h5 class="card-title">Datos del cliente</h5>
 
-        <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+        <form autocomplete="off" [formGroup]="forma" (ngSubmit)="save()">
 
           <div class="form-row">
             <div class="col-md-12 mb-3">
