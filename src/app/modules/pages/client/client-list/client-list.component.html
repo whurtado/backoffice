@@ -62,15 +62,11 @@
             </div>
             <button type="button" class="mt-2 btn btn-primary">Buscar</button>
         </form>
-    </div>
-  </div>
-
-  <div class="main-card mb-3 card">
-    <div class="card-body">
+        <br> <br>
         <table class=" table table-bordered table-striped table-hover animated fadeIn">
             <thead>
               <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Tipo de Documento</th>
                 <th>Número Documento</th>
@@ -84,7 +80,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let client of clients; let i=index">
-                  <th scope="row"> {{ i+1 }} </th>
+                  <th scope="row"> {{ client.id}} </th>
                   <td>{{ client.name }}</td>
                   <td>{{ client.documenttype.name }}</td>
                   <td>{{ client.documentnumber }}</td>
@@ -112,6 +108,28 @@
               </tr>
             </tbody>
         </table>
+        <nav>
+            <ul class="pagination justify-content-end">
+                <!-- validar si mostrar o no -->
+                <li class="page-item" [class.disabled]="currentPage === 1" >
+                    <button type="button" class="page-link" (click)="changePage(currentPage-1)" >
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Anterior</span>
+                    </button>
+                </li>
+                <!-- repetir -->
+                <li class="page-item" [class.active]="item === currentPage" *ngFor="let item of totalPages">
+                    <button type="button"  class="page-link" (click)="changePage(item)" >{{ item }}</button>
+                </li>
+                <!-- validar si mostrar o no -->
+                <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                  <button type="button" class="page-link" (click)="changePage(currentPage+1)" >
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Siguiente</span>
+                  </button>
+                </li>
+            </ul>
+        </nav>
     </div>
   </div>
 

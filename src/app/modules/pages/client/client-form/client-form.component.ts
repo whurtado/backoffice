@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from '../../../services/client/client.service';
 import { AlertMessagesService } from '../../../services/alert/alert-messages.service';
 import { DataSourceService } from '../../../services/data-source/data-source.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
 
 @Component({
@@ -23,6 +23,7 @@ export class CreateClientComponent implements OnInit {
   clientId : number = null;
 
   constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
               private _clientService: ClientService,
               private _alertMessagesService : AlertMessagesService,
               private _dataSourceService : DataSourceService,
@@ -108,7 +109,7 @@ export class CreateClientComponent implements OnInit {
         status: client.status.id,
         observations: client.observations,
       });
-      console.log( this.forma.value);
+      //console.log( this.forma.value);
     }
   }
 
@@ -135,9 +136,17 @@ export class CreateClientComponent implements OnInit {
       if(!response.ok){
         this._alertMessagesService.showMessage('error', response.message);
       }else{
-        this._alertMessagesService.showMessage('success', response.message, false, 2000);
-        this.forma.reset();
+        this._alertMessagesService.showMessage('success', response.message, this.forma.get('name').value, false, 2000);
+        this.cleanForm();
       }
+    }
+  }
+
+  cleanForm(){
+    if(!this.isEditing){
+      this.forma.reset();
+    }else{
+      this.router.navigate(['cliente','listar-clientes']);
     }
   }
 }

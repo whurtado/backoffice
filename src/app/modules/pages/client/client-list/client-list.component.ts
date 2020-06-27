@@ -11,6 +11,8 @@ import { AlertMessagesService } from '../../../services/alert/alert-messages.ser
 export class ClientListComponent implements OnInit {
 
   clients: Client[] = [];
+  currentPage: number = 1;
+  totalPages: number[] = [];
 
   constructor(private _clientServise : ClientService,
               private _alertMessagesService: AlertMessagesService) { }
@@ -19,17 +21,28 @@ export class ClientListComponent implements OnInit {
     this.listAllClients();
   }
 
-  listAllClients(){
-    this._clientServise.getAllClients().subscribe(response => {
-        if(!response.ok){
-            this._alertMessagesService.showMessage('error', response.message);
-        }else{
-          this.clients = response.data;
+  async listAllClients(page: number = 1, limit: number = 3){
+
+    try {
+      let response = await this._clientServise.getAllClientsPaginated(page, limit).toPromise();
+
+      if(!response.ok){
+        this._alertMessagesService.showMessage('error', response.message);
+      }else{
+        this.clients = response.data.data;
+        this.currentPage = response.data.page;
+        this.totalPages = [];
+        for (let index = 1; index <= response.data.totalPages; index++) {
+          this.totalPages.push(index);
         }
-    },
-    error => {
-        this._alertMessagesService.showMessage('error', error);
-    });
+      }
+    } catch (error) {
+      this._alertMessagesService.showMessage('error', error);
+    }
+  }
+
+  async changePage(page: number){
+    await this.listAllClients(page);
   }
 
 }
