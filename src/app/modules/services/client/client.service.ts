@@ -30,6 +30,18 @@ export class ClientService {
     );
   }
 
+  getAllClientsPaginated(page: number, limit: number) : Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    const url = this.env.apiGatewayBackOffice + constants.config.client + page+"/"+limit;
+    return this.http.get(url, {headers})
+      .pipe(
+        delay(100),
+        catchError(err =>  of( err.error))
+      );
+  }
+
   getClient(id: number) : Observable<any> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
