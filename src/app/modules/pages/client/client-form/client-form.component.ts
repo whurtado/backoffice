@@ -5,6 +5,7 @@ import { AlertMessagesService } from '../../../services/alert/alert-messages.ser
 import { DataSourceService } from '../../../services/data-source/data-source.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-client-form',
@@ -74,7 +75,7 @@ export class CreateClientComponent implements OnInit {
       city: ['', Validators.required],
       homeaddres: ['', Validators.required],
       phone: ['', [Validators.required, Validators.maxLength(15)]],
-      email: ['', [Validators.required, Validators.maxLength(150), Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      email: ['', [Validators.required, Validators.maxLength(150), Validators.pattern('[aA-zZ0-9._%+-]+@[aA-zZ0-9.-]+\.[aA-zZ]{2,3}$')]],
       status: ['', Validators.required],
       observations: ['', [Validators.required, Validators.maxLength(250)]]
     });
@@ -113,7 +114,7 @@ export class CreateClientComponent implements OnInit {
     }
   }
 
-  async save(){
+  save(){
     // si el formulario es invalido se marca como tocado cada campo y activa las validaciones
     if(this.forma.invalid){
       return Object.values(this.forma.controls).forEach(control => {
@@ -121,25 +122,33 @@ export class CreateClientComponent implements OnInit {
       });
     }
 
-    let response = null;
     this._alertMessagesService.showMessageLoading();
-
+    let observable : Observable<any>;
     if(this.isEditing){
-      response = await this._clientService.updateClient(this.forma.value).toPromise();
+      observable = this._clientService.updateClient(this.forma.value);
     }else{
-      response = await this._clientService.createClient(this.forma.value).toPromise();
+      observable = this._clientService.createClient(this.forma.value);
     }
 
-    if(response === null){
-      this._alertMessagesService.showMessage('error', 'se presentó un error en el api');
-    }else{
+    observable.subscribe(response => {
       if(!response.ok){
         this._alertMessagesService.showMessage('error', response.message);
       }else{
-        this._alertMessagesService.showMessage('success', response.message, this.forma.get('name').value, false, 2000);
-        this.cleanForm();
+        if(response === null){
+          this._alertMessagesService.showMessage('error', 'se presentó un error en el api');
+        }else{
+          if(!response.ok){
+            this._alertMessagesService.showMessage('error', response.message);
+          }else{
+            this._alertMessagesService.showMessage('success', response.message, this.forma.get('name').value, false, 2000);
+            this.cleanForm();
+          }
+        }
       }
-    }
+    },
+    error =>{
+      this._alertMessagesService.showMessage('error', error);
+    });
   }
 
   cleanForm(){

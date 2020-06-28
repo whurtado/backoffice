@@ -27,44 +27,80 @@
   <div class="main-card mb-3 card animated fadeIn fast">
     <div class="card-body">
         <h5 class="card-title">Filtros de Búsqueda</h5>
-        <form class="">
+          <form autocomplete="off" [formGroup]="forma" (ngSubmit)="search()">
+
             <div class="form-row">
-                <div class="col-md-4">
-                    <div class="position-relative form-group">
-                      <!-- <label for="exampleEmail11" class="">Filtro 1</label> -->
-                      <input
-                        name="email"
-                        placeholder="Filtro 1"
-                        type="email"
-                        class="mb-2 form-control-sm form-control">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="position-relative form-group">
-                      <!-- <label for="examplePassword11" class="">Filtro 2</label> -->
-                      <input
-                        name="password"
-                        placeholder="Filtro 2"
-                        type="password"
-                        class="mb-2 form-control-sm form-control">
-                      </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="position-relative form-group">
-                    <!-- <label for="examplePassword11" class="">Filtro 2</label> -->
-                    <input
-                      name="password"
-                      placeholder="Filtro 3"
-                      type="password"
-                      class="mb-2 form-control-sm form-control">
-                    </div>
+              <div class="col-md-6 mb-3">
+                <label>Nombre</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Nombre"
+                  [value]="forma.get('name').value | uppercase"
+                  formControlName="name">
               </div>
+
+                <div class="col-md-2 mb-3 offset-1">
+                    <label >Tipo documento</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Tipo documento"
+                      formControlName="documenttype"
+                      >
+                      <option *ngFor="let item of dataSourceDocumentType" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label >Número Documento</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Número Documento"
+                      formControlName="documentnumber"
+                      >
+
+                </div>
             </div>
-            <button type="button" class="mt-2 btn btn-primary">Buscar</button>
+            <div class="form-row">
+                <div class="col-md-3 mb-3">
+                    <label >Departamento</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Departamento"
+                      formControlName="department"
+                      >
+                      <option *ngFor="let item of dataSourceDepartment" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Ciudad</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Ciudad"
+                      formControlName="city"
+                      >
+                      <option *ngFor="let item of dataSourceCity" [value]="item.id">{{ item.name }}</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 mb-3 offset-1">
+                    <label >Estado</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Estado"
+                      formControlName="status"
+                      >
+                      <option *ngFor="let item of dataSourceStatus" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+              </div>
+
+          <button class="btn  btn-block btn-outline-primary " type="submit">Buscar</button>
         </form>
-        <br> <br>
-        <table class=" table table-bordered table-striped table-hover animated fadeIn">
-            <thead>
+        <hr>
+        <table class=" table table-bordered table-striped table-hover table-responsive animated fadeIn">
+            <thead >
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -88,44 +124,57 @@
                   <td>{{ client.email }}</td>
                   <td>{{ client.homeaddres }}</td>
                   <td>{{ client.status.name }}</td>
-                  <td>{{ client.city.name }}</td>
+                  <td>{{ client.city.name + ' - ' + client.city.department.name }}</td>
                   <td>
                     <div class="text-center">
-                      <!-- <div role="group" class="btn-group-sm btn-group btn-group-toggle" data-toggle="buttons"> -->
-                          <a [routerLink]="['/','cliente','editar-cliente', client.id]"
-                            data-toggle="tooltip"
-                            title="Editar"
-                            data-placement="top"
-                            class="btn-transition btn btn-outline-info">
-                            <i class="fa fa-edit"></i>
-                          </a>
-                          <!-- <button type="button" data-toggle="tooltip" title="Eliminar" data-placement="top" class="btn-transition btn btn-outline-danger">
-                            <i class="fa fa-trash-alt"></i>
-                          </button> -->
-                      </div>
-                    <!-- </div> -->
+                      <a [routerLink]="['/','cliente','editar-cliente', client.id]"
+                        data-toggle="tooltip"
+                        title="Editar"
+                        data-placement="top"
+                        class="btn-transition btn btn-outline-info">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                    </div>
                   </td>
               </tr>
             </tbody>
         </table>
         <nav>
             <ul class="pagination justify-content-end">
-                <!-- validar si mostrar o no -->
                 <li class="page-item" [class.disabled]="currentPage === 1" >
-                    <button type="button" class="page-link" (click)="changePage(currentPage-1)" >
+                  <button type="button" class="page-link" (click)="changePage(1)" >
+                    Primero
+                  </button>
+                </li>
+                <!-- validar si habilitar o no -->
+                <li class="page-item" [class.disabled]="currentPage === 1" >
+                    <button type="button" class="page-link" (click)="previousPage()" >
                       <span aria-hidden="true">&laquo;</span>
                       <span class="sr-only">Anterior</span>
                     </button>
                 </li>
+                <!-- validar si mostrar o no -->
+                <li class="page-item" *ngIf="currentPageGroup > 1">
+                  <button type="button"  class="page-link" (click)="previousPageGroup()" >...</button>
+                </li>
                 <!-- repetir -->
-                <li class="page-item" [class.active]="item === currentPage" *ngFor="let item of totalPages">
-                    <button type="button"  class="page-link" (click)="changePage(item)" >{{ item }}</button>
+                <li class="page-item" [class.active]="item === currentPage" *ngFor="let item of arrayPagesNumbers">
+                    <button type="button" class="page-link" (click)="changePage(item)" >{{ item }}</button>
                 </li>
                 <!-- validar si mostrar o no -->
-                <li class="page-item" [class.disabled]="currentPage === totalPages.length">
-                  <button type="button" class="page-link" (click)="changePage(currentPage+1)" >
+                <li class="page-item" *ngIf="currentPageGroup < totalPageGroups">
+                  <button type="button" class="page-link" (click)="nextPageGroup()"  >...</button>
+                </li>
+                <!-- validar si habilitar o no -->
+                <li class="page-item" [class.disabled]="currentPage === totalPages || totalPages===0">
+                  <button type="button" class="page-link" (click)="nextPage()" >
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Siguiente</span>
+                  </button>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages || totalPages===0" >
+                  <button type="button" class="page-link" (click)="changePage(totalPages)" >
+                    Último
                   </button>
                 </li>
             </ul>
