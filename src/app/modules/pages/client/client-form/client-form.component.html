@@ -29,6 +29,7 @@
                   class="form-control form-control-sm"
                   placeholder="Nombre"
                   required
+                  [value]="forma.get('name').value | uppercase"
                   formControlName="name"
                   [class.is-invalid]="isInvalidField('name')">
               </div>
@@ -49,7 +50,7 @@
                 <div class="col-md-6 mb-3">
                     <label >Número Documento</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control form-control-sm"
                       placeholder="Número Documento"
                       required
@@ -92,6 +93,7 @@
                       class="form-control form-control-sm"
                       placeholder="Dirección"
                       required
+                      [value]="forma.get('homeaddres').value | uppercase"
                       formControlName="homeaddres"
                       [class.is-invalid]="isInvalidField('homeaddres')"
                       >
@@ -101,7 +103,7 @@
               <div class="col-md-6 mb-3">
                   <label>Celular</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
                     placeholder="Celular"
                     required
@@ -117,6 +119,7 @@
                     class="form-control form-control-sm"
                     placeholder="Correo"
                     required
+                    [value]="forma.get('email').value | uppercase"
                     formControlName="email"
                     [class.is-invalid]="isInvalidField('email')"
                     >
@@ -144,6 +147,7 @@
                   class="form-control form-control-sm"
                   cols="30"
                   rows="3"
+                  [value]="forma.get('observations').value | uppercase"
                   formControlName="observations"
                   [class.is-invalid]="isInvalidField('observations')"
                   ></textarea>

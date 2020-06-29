@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { delay, catchError } from "rxjs/operators";
 import {constants} from '../../../../config/app.constants';
 import { EnvService } from '../utils/env.service';
@@ -30,14 +30,21 @@ export class ClientService {
     );
   }
 
-  getAllClientsPaginated(page: number, limit: number) : Observable<any> {
+  getAllClientsPaginated(page: number, limit: number, filters?: any) : Observable<any> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    const url = this.env.apiGatewayBackOffice + constants.config.client + page+"/"+limit;
-    return this.http.get(url, {headers})
+
+    let params = {
+      page:  page.toString(),
+      limit: limit.toString(),
+      filters: filters
+    }
+
+    const url = this.env.apiGatewayBackOffice + constants.config.clientPaginationFilter;
+    return this.http.post(url, params, {headers})
       .pipe(
-        delay(100),
+        delay(200),
         catchError(err =>  of( err.error))
       );
   }

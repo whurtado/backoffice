@@ -3,6 +3,7 @@ export const constants = {
       // editarCliente: 'api/auth/usuarios',
       // crearUsuario: 'api/auth/usuarios/registrar',
       client: 'api/client/',
+      clientPaginationFilter: 'api/client/pagination-filters/',
 
 
       // mostrarUsuario: 'api/auth/usuarios/edit',
