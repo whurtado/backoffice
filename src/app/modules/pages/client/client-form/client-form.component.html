@@ -32,6 +32,7 @@
                   [value]="forma.get('name').value | uppercase"
                   formControlName="name"
                   [class.is-invalid]="isInvalidField('name')">
+                <small *ngIf="validateField('name').show" class="text-danger"> {{ validateField('name').message }} </small>
               </div>
             </div>
             <div class="form-row">
@@ -46,18 +47,19 @@
                       >
                       <option *ngFor="let item of dataSourceDocumentType" [value]="item.id">{{ item.name }}</option>
                     </select>
+                    <small *ngIf="validateField('documenttype').show" class="text-danger"> {{ validateField('documenttype').message }} </small>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label >Número Documento</label>
                     <input
-                      type="number"
+                      type="text"
                       class="form-control form-control-sm"
                       placeholder="Número Documento"
                       required
                       formControlName="documentnumber"
                       [class.is-invalid]="isInvalidField('documentnumber')"
                       >
-
+                      <small *ngIf="validateField('documentnumber').show" class="text-danger"> {{ validateField('documentnumber').message }} </small>
                 </div>
             </div>
             <div class="form-row">
@@ -72,6 +74,7 @@
                       >
                       <option *ngFor="let item of dataSourceDepartment" [value]="item.id">{{ item.name }}</option>
                     </select>
+                    <small *ngIf="validateField('department').show" class="text-danger"> {{ validateField('department').message }} </small>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label>Ciudad</label>
@@ -84,7 +87,7 @@
                       >
                       <option *ngFor="let item of dataSourceCity" [value]="item.id">{{ item.name }}</option>
                     </select>
-
+                    <small *ngIf="validateField('city').show" class="text-danger"> {{ validateField('city').message }} </small>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label>Dirección</label>
@@ -97,33 +100,33 @@
                       formControlName="homeaddres"
                       [class.is-invalid]="isInvalidField('homeaddres')"
                       >
+                      <small *ngIf="validateField('homeaddres').show" class="text-danger"> {{ validateField('homeaddres').message }} </small>
                 </div>
             </div>
             <div class="form-row">
               <div class="col-md-6 mb-3">
                   <label>Celular</label>
                   <input
-                    type="number"
+                    type="text"
                     class="form-control form-control-sm"
                     placeholder="Celular"
                     required
                     formControlName="phone"
                     [class.is-invalid]="isInvalidField('phone')"
                     >
-
+                  <small *ngIf="validateField('phone').show" class="text-danger"> {{ validateField('phone').message }} </small>
               </div>
               <div class="col-md-6 mb-3">
                   <label>Correo Eléctronico</label>
                   <input
-                    type="email"
+                    type="text"
                     class="form-control form-control-sm"
                     placeholder="Correo"
                     required
-                    [value]="forma.get('email').value | uppercase"
                     formControlName="email"
                     [class.is-invalid]="isInvalidField('email')"
                     >
-
+                    <small *ngIf="validateField('email').show" class="text-danger"> {{ validateField('email').message }} </small>
               </div>
           </div>
           <div class="form-row">
@@ -138,6 +141,7 @@
                   >
                   <option *ngFor="let item of dataSourceStatus" [value]="item.id">{{ item.name }}</option>
                 </select>
+                <small *ngIf="validateField('status').show" class="text-danger"> {{ validateField('status').message }} </small>
             </div>
           </div>
           <div class="form-row">
@@ -151,6 +155,7 @@
                   formControlName="observations"
                   [class.is-invalid]="isInvalidField('observations')"
                   ></textarea>
+                <small *ngIf="validateField('observations').show" class="text-danger"> {{ validateField('observations').message }} </small>
             </div>
           </div>
           <button class="btn btn-primary" type="submit">{{ formTitle }}</button>

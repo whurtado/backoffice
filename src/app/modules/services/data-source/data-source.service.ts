@@ -41,7 +41,7 @@ export class DataSourceService {
       dataSource = data;
       dataSource.unshift({
         id: '',
-        name: 'Seleccione uno'
+        name: 'SELECCIONE UNO'
       });
     }
     return dataSource;

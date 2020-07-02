@@ -6,6 +6,8 @@ import { DataSourceService } from '../../../services/data-source/data-source.ser
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
 import { Observable } from 'rxjs';
+import { ValidatorsService } from '../../../services/validators/validators.service';
+import { FieldValidation } from '../../../interfaces/field-validation.interface';
 
 @Component({
   selector: 'app-client-form',
@@ -28,6 +30,7 @@ export class CreateClientComponent implements OnInit {
               private _clientService: ClientService,
               private _alertMessagesService : AlertMessagesService,
               private _dataSourceService : DataSourceService,
+              private _validatorsService : ValidatorsService,
               private fb: FormBuilder) {
     this.clientId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     this.getSourceDocumentType();
@@ -70,15 +73,19 @@ export class CreateClientComponent implements OnInit {
       id: [''],
       name: ['', [Validators.required, Validators.maxLength(50)]],
       documenttype: ['', Validators.required],
-      documentnumber: ['', [Validators.required, Validators.maxLength(15)]],
+      documentnumber: ['', [Validators.required, Validators.maxLength(15), Validators.pattern(this._validatorsService.getRegExpNumber())]],
       department: ['', Validators.required],
       city: ['', Validators.required],
       homeaddres: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.maxLength(15)]],
-      email: ['', [Validators.required, Validators.maxLength(150), Validators.pattern('[aA-zZ0-9._%+-]+@[aA-zZ0-9.-]+\.[aA-zZ]{2,3}$')]],
+      phone: ['', [Validators.required, Validators.maxLength(15), Validators.pattern(this._validatorsService.getRegExpNumber())]],
+      email: ['', [Validators.required, Validators.maxLength(150), Validators.pattern(this._validatorsService.getRegExpEmail())]],
       status: ['', Validators.required],
       observations: ['', [Validators.required, Validators.maxLength(250)]]
     });
+  }
+
+  validateField(control: string) : FieldValidation {
+    return this._validatorsService.validateField(this.forma.get(control));
   }
 
   createListeners(){
@@ -131,18 +138,15 @@ export class CreateClientComponent implements OnInit {
     }
 
     observable.subscribe(response => {
-      if(!response.ok){
-        this._alertMessagesService.showMessage('error', response.message);
+      if(response === null){
+        this._alertMessagesService.showMessage('error', 'se presentó un error en el api');
       }else{
-        if(response === null){
-          this._alertMessagesService.showMessage('error', 'se presentó un error en el api');
+        if(!response.ok){
+          this._alertMessagesService.showMessage('error', response.message);
         }else{
-          if(!response.ok){
-            this._alertMessagesService.showMessage('error', response.message);
-          }else{
-            this._alertMessagesService.showMessage('success', response.message, this.forma.get('name').value, false, 2000);
-            this.cleanForm();
-          }
+          let nameForm :string = this.forma.get('name').value;
+          this._alertMessagesService.showMessage('success', response.message, nameForm.toUpperCase() , false, 2000);
+          this.cleanForm();
         }
       }
     },

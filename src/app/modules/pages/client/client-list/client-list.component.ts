@@ -11,13 +11,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
-
+  //form
   forma: FormGroup;
   clients: Client[] = [];
   dataSourceDocumentType: any[] = [];
   dataSourceDepartment: any[] = [];
   dataSourceCity: any[] = [];
   dataSourceStatus: any[] = [];
+  isSearch: boolean = false;
 
   //filter
   filters: any;
@@ -90,6 +91,7 @@ export class ClientListComponent implements OnInit {
   }
 
   listAllClients(isBtnSearch?:boolean){
+    this._alertMessagesService.showMessageLoading();
     this._clientService.getAllClientsPaginated(this.currentPage, this.limitData, this.filters).subscribe(response => {
         if(!response.ok){
           this._alertMessagesService.showMessage('error', response.message);
@@ -101,24 +103,23 @@ export class ClientListComponent implements OnInit {
           this.totalPageGroups = Math.ceil(this.totalPages / this.pagesForEachGroup);
           console.log('totalPageGroups: ', this.totalPageGroups);
           console.log('this.filters: ', this.filters);
-          if(isBtnSearch){
-            this.currentPageGroup = 1;
-            this.setPageValues();
-          }
+          this.setPageValues();
           this.pagesNumbers();
+          this._alertMessagesService.closeMessage();
         }
       },
       error =>{
         this._alertMessagesService.showMessage('error', error);
+        this._alertMessagesService.closeMessage();
       });
   }
 
   search(){
     this.currentPage = 1;
-    this._alertMessagesService.showMessageLoading();
+    this.currentPageGroup = 1;
     this.filters = this.forma.value;
+    this.isSearch = true;
     this.listAllClients(true);
-    this._alertMessagesService.closeMessage();
   }
 
   pagesNumbers(){
