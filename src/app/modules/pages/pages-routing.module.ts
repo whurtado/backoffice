@@ -10,6 +10,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent},
       { path: 'dashboard', component: DashboardComponent},
       { path: 'cliente', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
+      { path: 'servidor-smtp', loadChildren: () => import('./smtp-server/smtp-server.module').then(m => m.SmtpServerModule) },
 
     ]
   }
