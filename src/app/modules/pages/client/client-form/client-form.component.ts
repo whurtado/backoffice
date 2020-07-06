@@ -122,7 +122,7 @@ export class CreateClientComponent implements OnInit {
     }
   }
 
-  save(){
+  save() {
     // si el formulario es invalido se marca como tocado cada campo y activa las validaciones
     if(this.forma.invalid){
       return Object.values(this.forma.controls).forEach(control => {
@@ -146,8 +146,11 @@ export class CreateClientComponent implements OnInit {
           this._alertMessagesService.showMessage('error', response.message);
         }else{
           let nameForm :string = this.forma.get('name').value;
-          this._alertMessagesService.showMessage('success', response.message, nameForm.toUpperCase() , false, 2000);
-          this.cleanForm();
+          this._alertMessagesService.showMessage('success', response.message, nameForm.toUpperCase() , false, 2000)
+          .then(() => {
+            this.forma.reset();
+            this.router.navigate(['cliente','listar-clientes']);
+          });
         }
       }
     },
@@ -156,11 +159,4 @@ export class CreateClientComponent implements OnInit {
     });
   }
 
-  cleanForm(){
-    if(!this.isEditing){
-      this.forma.reset();
-    }else{
-      this.router.navigate(['cliente','listar-clientes']);
-    }
-  }
 }

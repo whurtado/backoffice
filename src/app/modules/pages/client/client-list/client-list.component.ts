@@ -96,13 +96,13 @@ export class ClientListComponent implements OnInit {
         if(!response.ok){
           this._alertMessagesService.showMessage('error', response.message);
         }else{
-          console.log(response.data);
+          //console.log(response.data);
           this.clients = response.data.data;
           this.currentPage = response.data.page;
           this.totalPages = response.data.totalPages;
           this.totalPageGroups = Math.ceil(this.totalPages / this.pagesForEachGroup);
-          console.log('totalPageGroups: ', this.totalPageGroups);
-          console.log('this.filters: ', this.filters);
+          //console.log('totalPageGroups: ', this.totalPageGroups);
+          //console.log('this.filters: ', this.filters);
           this.setPageValues();
           this.pagesNumbers();
           this._alertMessagesService.closeMessage();

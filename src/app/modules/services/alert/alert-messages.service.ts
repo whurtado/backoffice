@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Swal, { SweetAlertIcon } from 'sweetalert2';
+import Swal, { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +19,9 @@ export class AlertMessagesService {
     Swal.showLoading();
   }
 
-  showMessage(icon : SweetAlertIcon, message: string, title:string = '', showConfirmButton: boolean = true, timer: number = null){
+  showMessage(icon : SweetAlertIcon, message: string, title:string = '', showConfirmButton: boolean = true, timer: number = null) : Promise<SweetAlertResult<unknown>> {
     this.closeMessage();
-
-    Swal.fire({
+    return Swal.fire({
       position: 'center',
       icon: icon,
       title: title,
@@ -33,9 +32,10 @@ export class AlertMessagesService {
   }
 
   closeMessage(){
-    Swal.close();
+    if(Swal.isVisible()){
+      Swal.close();
+    }
   }
-
 
 
 }
