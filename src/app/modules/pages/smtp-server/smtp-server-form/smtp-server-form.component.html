@@ -1,0 +1,113 @@
+<div class="app-main__inner">
+  <div class="app-page-title">
+      <div class="page-title-wrapper">
+          <div class="page-title-heading">
+              <div class="page-title-icon">
+                  <i class="pe-7s-paper-plane icon-gradient bg-mean-fruit"></i>
+              </div>
+              <div>{{ formTitle }}
+                  <div class="page-title-subheading">
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="main-card mb-3 card animated fadeIn fast">
+        <div class="card-body">
+            <h5 class="card-title">Datos del servidor SMTP</h5>
+            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="save()">
+                <div class="form-row">
+                  <div class="col-md-12 mb-3">
+                    <label>Host</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Host"
+                      required
+                      formControlName="host"
+                      [class.is-invalid]="isInvalidField('host')">
+                    <small *ngIf="validateField('host').show" class="text-danger"> {{ validateField('host').message }} </small>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-12 mb-3">
+                    <label>Puerto</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm"
+                      placeholder="Puerto"
+                      required
+                      formControlName="port"
+                      [class.is-invalid]="isInvalidField('port')">
+                    <small *ngIf="validateField('port').show" class="text-danger"> {{ validateField('port').message }} </small>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-12 mb-3">
+                    <label>Usuario de acceso</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="User"
+                      required
+                      formControlName="user"
+                      [class.is-invalid]="isInvalidField('user')">
+                    <small *ngIf="validateField('user').show" class="text-danger"> {{ validateField('user').message }} </small>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-12 mb-3">
+                    <label>Clave de acceso</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Contraseña"
+                      required
+                      formControlName="password"
+                      [class.is-invalid]="isInvalidField('password')">
+                    <small *ngIf="validateField('password').show" class="text-danger"> {{ validateField('password').message }} </small>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-12 mb-3">
+                    <label>Cifrado (Encryption)</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Estado"
+                      required
+                      formControlName="encryption"
+                      [class.is-invalid]="isInvalidField('encryption')" >
+                      <option *ngFor="let item of dataSourceSmtpServerEncryption" [value]="item.value">{{ item.text }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12 mb-3">
+                    <label >Estado</label>
+                    <select
+                      class="form-control form-control-sm"
+                      placeholder="Estado"
+                      required
+                      formControlName="status"
+                      [class.is-invalid]="isInvalidField('status')"
+                      >
+                      <option *ngFor="let item of dataSourceStatus" [value]="item.id">{{ item.name }}</option>
+                    </select>
+                    <small *ngIf="validateField('status').show" class="text-danger"> {{ validateField('status').message }} </small>
+                  </div>
+                </div>
+
+              <button class="btn btn-primary float-right" type="submit">{{ formTitle }}</button>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>

@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages/pages.component';
 import { LayoutModule } from '../layout/layout.module';
 import { ClientModule } from './client/client.module';
+import { SmtpServerModule } from "./smtp-server/smtp-server.module"
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ClientModule } from './client/client.module';
     FormsModule,
     ReactiveFormsModule,
     LayoutModule,
-    ClientModule
+    ClientModule,
+    SmtpServerModule
   ]
 })
 export class PagesModule { }
