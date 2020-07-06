@@ -32,7 +32,7 @@ export class CreateClientComponent implements OnInit {
               private _dataSourceService : DataSourceService,
               private _validatorsService : ValidatorsService,
               private fb: FormBuilder) {
-                
+
               this.clientId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
               this.getSourceDocumentType();
               this.getSourceStatus();
@@ -54,7 +54,7 @@ export class CreateClientComponent implements OnInit {
   }
 
   async getSourceStatus(){
-    this.dataSourceStatus = await this._dataSourceService.getDataSourceStatus();
+    this.dataSourceStatus = await this._dataSourceService.getDataSourceStatusOfClientModule();
   }
 
   async getSourceDepartment(){

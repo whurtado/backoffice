@@ -6,7 +6,7 @@ export class SmtpServer {
   user: string;
   password: string;
   encryption: string;
-  Status:number;
+  status: Status;
   createdat: Date;
   updatedat: Date;
 }

@@ -6,6 +6,7 @@ import { SmptServerService } from '../../../services/smtp-server/smpt-server.ser
 import { FieldValidation } from '../../../interfaces/field-validation.interface';
 import { SmtpServer } from '../../../models/smtpserver.model';
 import { Observable } from 'rxjs';
+import { DataSourceService } from '../../../services/data-source/data-source.service';
 
 @Component({
   selector: 'app-smtp-server-form',
@@ -18,11 +19,17 @@ export class SmtpServerFormComponent implements OnInit {
   formTitle: string;
   isEditing = false;
   smtpServers: SmtpServer;
+  dataSourceStatus : any[] = [];
+  dataSourceSmtpServerEncryption : any[] = [];
+  jQuery: any;
 
   constructor(private _smptServerService : SmptServerService,
               private _validatorsService : ValidatorsService,
+              private _dataSourceService : DataSourceService,
               private fb: FormBuilder,
               private _alertMessagesService : AlertMessagesService) {
+                this.dataSourceSmtpServerEncryption = this._dataSourceService.getDataSourceSmtpServerEncryption();
+                this.getSourceStatus();
                 this.createForm();
               }
 
@@ -31,6 +38,9 @@ export class SmtpServerFormComponent implements OnInit {
     this.getSmtpServer();
   }
 
+  async getSourceStatus(){
+    this.dataSourceStatus = await this._dataSourceService.getDataSourceStatusOfSmtpServerModule();
+  }
 
   isInvalidField(name:string){
     return this.forma.get(name).invalid && this.forma.get(name).touched;
@@ -42,8 +52,8 @@ export class SmtpServerFormComponent implements OnInit {
       host: ['', [Validators.required, Validators.maxLength(150)]],
       port: ['', Validators.required],
       user: ['', [Validators.required, Validators.maxLength(150)]],
-      encryption: [''],
-      status: [''],
+      encryption: ['', Validators.required],
+      status: ['', Validators.required],
       password: ['', [Validators.required, Validators.maxLength(150)]],
     });
   }
@@ -76,12 +86,22 @@ export class SmtpServerFormComponent implements OnInit {
     if(this.smtpServers !== undefined){
       this.formTitle = 'Editar Configuración SMTP';
       this.isEditing = true;
+
+      let status;
+      if(this.smtpServers.status.id !== undefined){
+        status = this.smtpServers.status.id;
+      }else{
+        status = this.smtpServers.status;
+      }
+
       this.forma.reset({
         id: this.smtpServers.id,
         host: this.smtpServers.host,
         port: this.smtpServers.port,
         user: this.smtpServers.user,
-        password: this.smtpServers.password
+        password: this.smtpServers.password,
+        encryption: this.smtpServers.encryption,
+        status
       });
     }
   }
@@ -101,7 +121,7 @@ export class SmtpServerFormComponent implements OnInit {
     }else{
       observable = this._smptServerService.createSmtpServer(this.forma.value);
     }
-    
+
     observable.subscribe(response => {
       console.log('save: ', response);
       if(response === null){

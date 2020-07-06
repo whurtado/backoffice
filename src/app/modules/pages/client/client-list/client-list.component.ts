@@ -55,7 +55,7 @@ export class ClientListComponent implements OnInit {
   }
 
   async getSourceStatus(){
-    this.dataSourceStatus = await this._dataSourceService.getDataSourceStatus();
+    this.dataSourceStatus = await this._dataSourceService.getDataSourceStatusOfClientModule();
   }
 
   async getSourceDepartment(){
