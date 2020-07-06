@@ -68,7 +68,7 @@ export class SmtpServerFormComponent implements OnInit {
         if(!response.ok){
           this._alertMessagesService.showMessage('error', response.message);
         }else{
-          console.log(response);
+          //console.log(response);
           this._alertMessagesService.closeMessage();
           if(response.data !== null){
             this.smtpServers = response.data[0];
@@ -86,8 +86,8 @@ export class SmtpServerFormComponent implements OnInit {
     if(this.smtpServers !== undefined){
       this.formTitle = 'Editar Configuración SMTP';
       this.isEditing = true;
+      let status     = null;
 
-      let status;
       if(this.smtpServers.status.id !== undefined){
         status = this.smtpServers.status.id;
       }else{
@@ -123,7 +123,6 @@ export class SmtpServerFormComponent implements OnInit {
     }
 
     observable.subscribe(response => {
-      console.log('save: ', response);
       if(response === null){
         this._alertMessagesService.showMessage('error', 'se presentó un error en el api');
       }else{

@@ -40,7 +40,7 @@
                 formControlName="name">
             </div>
 
-              <div class="col-md-2 mb-3 offset-1">
+              <div class="col-md-3 mb-3 offset-1">
                   <label >Tipo documento</label>
                   <select
                     class="form-control form-control-sm"
@@ -50,7 +50,7 @@
                     <option *ngFor="let item of dataSourceDocumentType" [value]="item.id">{{ item.name }}</option>
                   </select>
               </div>
-              <div class="col-md-3 mb-3">
+              <div class="col-md-2 mb-3">
                   <label >Número Documento</label>
                   <input
                     type="text"
@@ -100,15 +100,15 @@
         <hr>
         <ng-container *ngIf="(clients.length > 0); else noClientsFound">
           <div>
-            <table class=" table table-bordered table-striped table-hover table-responsive animated fadeIn">
+            <table class="table  table-hover table-responsive animated fadeIn">
               <thead >
                 <tr>
                   <th>ID</th>
                   <th>Nombre</th>
-                  <th>Tipo de Documento</th>
+                  <th>Tipo Documento</th>
                   <th>Número Documento</th>
                   <th>Celular</th>
-                  <th>Correo</th>
+                  <th>Correo Eléctronico</th>
                   <th>Dirección</th>
                   <th>Estado</th>
                   <th>Ciudad</th>
@@ -132,7 +132,7 @@
                           data-toggle="tooltip"
                           title="Editar Cliente"
                           data-placement="top"
-                          class="btn-transition btn btn-outline-info">
+                          >
                           <i class="fa fa-edit"></i>
                         </a>
                       </div>
